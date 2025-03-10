@@ -14,10 +14,10 @@ export const initialEquipmentData = [
     },
     controls: {
       ST: 1,
-      SW: 2,
-      SEN: 3,
-      REL: 2,
-      VA: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
     },
   },
   {
@@ -28,16 +28,16 @@ export const initialEquipmentData = [
     specs: {
       btu: {
         min: 100000,
-        max: 5000000,
+        max: 6500000,
       },
-      pricePerBtu: 0.05,
+      pricePerBtu: 0.04,
     },
     controls: {
-      ST: 1,
-      SW: 1,
-      SEN: 2,
-      REL: 1,
-      VA: 2,
+      ST: 0,
+      SW: 5,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
     },
   },
   {
@@ -64,39 +64,60 @@ export const initialEquipmentData = [
     id: 'ahu-1',
     type: 'ahu',
     name: 'Air Handling Unit (AHU)',
-    pricingType: 'per-cfm',
+    pricingType: 'per-hp',
     specs: {
-      cfm: {
-        min: 1000,
-        max: 50000,
+      hp: {
+        min: 2,
+        max: 100,
       },
-      pricePerCfm: 3.5,
+      pricePerHp: 1000,
+      presets: [
+        { hp: 2, price: 12000 },
+        { hp: 5, price: 19000 },
+        { hp: 15, price: 29000 },
+        { hp: 30, price: 55000 },
+        { hp: 50, price: 70000 },
+        { hp: 100, price: 100000 },
+      ]
     },
     controls: {
-      ST: 2,
-      SW: 3,
-      SEN: 5,
-      REL: 3,
-      VA: 4,
+      ST: 0,
+      SW: 5,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
     },
   },
   {
     id: 'pump-1',
     type: 'pump',
-    name: 'Pump',
+    name: 'Base Mount Pump',
     pricingType: 'per-hp',
     specs: {
       hp: {
-        min: 0.5,
-        max: 100,
+        min: 0.33,
+        max: 25,
       },
-      pricePerHp: 1200,
+      pricePerHp: 1000,
+      presets: [
+        { hp: 0.33, price: 750 },
+        { hp: 0.5, price: 1000 },
+        { hp: 1, price: 1000 },
+        { hp: 1.5, price: 1500 },
+        { hp: 2, price: 2500 },
+        { hp: 3, price: 4500 },
+        { hp: 5, price: 7500 },
+        { hp: 10, price: 14000 },
+        { hp: 15, price: 15000 },
+        { hp: 20, price: 22000 },
+        { hp: 25, price: 26000 },
+      ]
     },
     controls: {
-      ST: 1,
-      SW: 1,
-      SEN: 1,
-      REL: 1,
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
       VA: 0,
     },
   },
@@ -124,20 +145,25 @@ export const initialEquipmentData = [
     id: 'cooling-tower-1',
     type: 'cooling-tower',
     name: 'Cooling Tower',
-    pricingType: 'per-ton',
+    pricingType: 'per-hp',
     specs: {
-      tons: {
-        min: 50,
-        max: 1000,
+      hp: {
+        min: 10,
+        max: 30,
       },
-      pricePerTon: 750,
+      pricePerHp: 2000,
+      presets: [
+        { hp: 10, price: 14000 },
+        { hp: 25, price: 26000 },
+        { hp: 30, price: 60000 },
+      ]
     },
     controls: {
-      ST: 2,
-      SW: 2,
-      SEN: 3,
-      REL: 2,
-      VA: 1,
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
     },
   },
   {
@@ -164,35 +190,50 @@ export const initialEquipmentData = [
     specs: {
       hp: {
         min: 5,
-        max: 200,
+        max: 7.5,
       },
-      pricePerHp: 1800,
-    },
-    controls: {
-      ST: 1,
-      SW: 1,
-      SEN: 2,
-      REL: 1,
-      VA: 0,
-    },
-  },
-  {
-    id: 'exhaust-fan-1',
-    type: 'exhaust-fan',
-    name: 'Exhaust Fan',
-    pricingType: 'per-cfm',
-    specs: {
-      cfm: {
-        min: 500,
-        max: 20000,
-      },
-      pricePerCfm: 1.2,
+      pricePerHp: 1500,
+      presets: [
+        { hp: 5, price: 7500 },
+        { hp: 7.5, price: 10000 },
+      ]
     },
     controls: {
       ST: 1,
       SW: 1,
       SEN: 1,
       REL: 1,
+      VA: 1,
+    },
+  },
+  {
+    id: 'exhaust-fan-1',
+    type: 'exhaust-fan',
+    name: 'Exhaust Fan',
+    pricingType: 'per-hp',
+    specs: {
+      hp: {
+        min: 0.08,
+        max: 15,
+      },
+      pricePerHp: 1500,
+      presets: [
+        { hp: 0.08, price: 450 },  // 1/12 HP
+        { hp: 0.25, price: 850 },  // 1/4 HP
+        { hp: 0.33, price: 1000 }, // 1/3 HP
+        { hp: 0.5, price: 1200 },  // 1/2 HP
+        { hp: 1, price: 1950 },
+        { hp: 2, price: 2700 },
+        { hp: 3, price: 4700 },
+        { hp: 5, price: 7700 },
+        { hp: 15, price: 15000 },
+      ]
+    },
+    controls: {
+      ST: 0,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
       VA: 0,
     },
   },
@@ -218,14 +259,372 @@ export const initialEquipmentData = [
     name: 'Humidifier',
     pricingType: 'fixed',
     specs: {
-      basePrice: 3200,
+      basePrice: 1500,
     },
     controls: {
       ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'air-drier-1',
+    type: 'air-drier',
+    name: 'Air Drier',
+    pricingType: 'per-hp',
+    specs: {
+      hp: {
+        min: 1,
+        max: 1,
+      },
+      pricePerHp: 2000,
+      presets: [
+        { hp: 1, price: 2000 },
+      ]
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'co-monitor-1',
+    type: 'co-monitor',
+    name: 'CO Monitor',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 3000,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'gas-monitor-1',
+    type: 'gas-monitor',
+    name: 'Gas Monitor',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 5000,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'ductless-split-1',
+    type: 'ductless-split',
+    name: 'Ductless Split',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 3000,
+      options: [
+        { name: 'Standard', price: 3000 },
+        { name: 'Premium', price: 6000 },
+      ]
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'dust-collector-1',
+    type: 'dust-collector',
+    name: 'Dust Collector',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 5000,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 2,
+    },
+  },
+  {
+    id: 'fan-coil-1',
+    type: 'fan-coil',
+    name: 'Fan Coil Unit',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 1000,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'force-flow-1',
+    type: 'force-flow',
+    name: 'Force Flow Convector',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 900,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'furnace-1',
+    type: 'furnace',
+    name: 'Furnace',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 4500,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'split-system-1',
+    type: 'split-system',
+    name: 'Split System',
+    pricingType: 'per-ton',
+    specs: {
+      tons: {
+        min: 1,
+        max: 20,
+      },
+      pricePerTon: 2800,
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'condensing-unit-1',
+    type: 'condensing-unit',
+    name: 'Condensing Unit',
+    pricingType: 'per-ton',
+    specs: {
+      tons: {
+        min: 1,
+        max: 20,
+      },
+      pricePerTon: 2000,
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'hepa-unit-1',
+    type: 'hepa-unit',
+    name: 'HEPA Unit (Residential)',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 2000,
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'hrv-1',
+    type: 'hrv',
+    name: 'HRV (Commercial)',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 2000,
+      options: [
+        { name: 'Small', price: 2000 },
+        { name: 'Medium', price: 6000 },
+        { name: 'Large', price: 8000 },
+      ]
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'ice-machine-1',
+    type: 'ice-machine',
+    name: 'Ice Machine',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 500,
+      options: [
+        { name: 'Small', price: 500 },
+        { name: 'Medium', price: 1500 },
+        { name: 'Large', price: 3000 },
+      ]
+    },
+    controls: {
+      ST: 0,
+      SW: 0,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'makeup-air-1',
+    type: 'makeup-air',
+    name: 'Make Up Air',
+    pricingType: 'per-hp',
+    specs: {
+      hp: {
+        min: 3,
+        max: 40,
+      },
+      pricePerHp: 1500,
+      presets: [
+        { hp: 3, price: 15000 },
+        { hp: 5, price: 20000 },
+        { hp: 7.5, price: 25000 },
+        { hp: 10, price: 35000 },
+        { hp: 25, price: 45000 },
+        { hp: 40, price: 65000 },
+      ]
+    },
+    controls: {
+      ST: 1,
       SW: 1,
       SEN: 1,
       REL: 1,
       VA: 1,
+    },
+  },
+  {
+    id: 'radiant-heater-1',
+    type: 'radiant-heater',
+    name: 'Radiant Tube Heaters',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 4000,
+      options: [
+        { name: 'Less than 60 ft', price: 4000 },
+        { name: '60 ft or more', price: 5000 },
+      ]
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'strip-heater-1',
+    type: 'strip-heater',
+    name: 'Strip Heaters (Electric)',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 2000,
+    },
+    controls: {
+      ST: 0,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'unit-heater-1',
+    type: 'unit-heater',
+    name: 'Unit Heaters',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 3500,
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'water-heater-1',
+    type: 'water-heater',
+    name: 'Water Heaters (Hot Water)',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 1200,
+      options: [
+        { name: '25 gallons', price: 900 },
+        { name: '40 gallons', price: 1200 },
+        { name: '100 gallons', price: 12000 },
+      ]
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
+    },
+  },
+  {
+    id: 'tankless-water-heater-1',
+    type: 'tankless-water-heater',
+    name: 'Water Heaters (Electric - Tankless)',
+    pricingType: 'fixed',
+    specs: {
+      basePrice: 800,
+      options: [
+        { name: '19 gallons', price: 800 },
+        { name: '200,000 BTU Tankless', price: 6000 },
+      ]
+    },
+    controls: {
+      ST: 1,
+      SW: 1,
+      SEN: 0,
+      REL: 0,
+      VA: 0,
     },
   },
 ];
