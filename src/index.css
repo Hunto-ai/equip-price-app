@@ -5,9 +5,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f5f5;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Add some spacing to the bottom of the page */
+.MuiContainer-root {
+  padding-bottom: 40px;
+}
+
+/* Make tables more readable */
+.MuiTableCell-root {
+  padding: 12px 16px;
+}
+
+/* Improve form field spacing */
+.MuiTextField-root {
+  margin-bottom: 16px;
+}
+
+/* Ensure pie chart is responsive */
+canvas {
+  max-width: 100%;
 }
